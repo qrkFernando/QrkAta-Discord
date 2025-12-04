@@ -1,0 +1,243 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  background: linear-gradient(135deg, #36393f 0%, #2f3136 100%);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Scrollbar Premium Global */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #5865f2 0%, #4752c4 100%);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #7289da 0%, #5865f2 100%);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  box-shadow: 0 0 12px rgba(88, 101, 242, 0.6);
+}
+
+/* ========== ANIMACIONES GLOBALES ========== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(88, 101, 242, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(88, 101, 242, 0.8);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ========== ESTILOS DE FORMULARIOS ========== */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+.MuiTextField-root {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input:focus,
+textarea:focus {
+  box-shadow: 0 0 20px rgba(88, 101, 242, 0.3);
+}
+
+/* ========== ESTILOS DE BOTONES ========== */
+
+button,
+.MuiButton-root {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+button:hover,
+.MuiButton-root:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(88, 101, 242, 0.3);
+}
+
+button:active,
+.MuiButton-root:active {
+  transform: translateY(0);
+}
+
+/* ========== ESTILOS DE PAPER/CARDS ========== */
+
+.MuiPaper-root {
+  background: linear-gradient(135deg, #2f3136 0%, #282b30 100%);
+  border: 1px solid rgba(88, 101, 242, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.MuiPaper-root:hover {
+  border-color: rgba(88, 101, 242, 0.5);
+  box-shadow: 0 8px 32px rgba(88, 101, 242, 0.1);
+}
+
+/* ========== ESTILOS DE AVATAR ========== */
+
+.MuiAvatar-root {
+  border: 2px solid rgba(88, 101, 242, 0.3);
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #5865f2 0%, #4752c4 100%);
+}
+
+.MuiAvatar-root:hover {
+  border-color: rgba(88, 101, 242, 0.8);
+  box-shadow: 0 0 20px rgba(88, 101, 242, 0.4);
+}
+
+/* ========== ESTILOS DE CHIP ========== */
+
+.MuiChip-root {
+  background: rgba(88, 101, 242, 0.1);
+  border: 1px solid rgba(88, 101, 242, 0.3);
+  transition: all 0.2s ease;
+}
+
+.MuiChip-root:hover {
+  background: rgba(88, 101, 242, 0.2);
+  border-color: rgba(88, 101, 242, 0.6);
+}
+
+/* ========== ESTILOS DE ALERT ========== */
+
+.MuiAlert-root {
+  border-radius: 8px;
+  border: 1px solid;
+  animation: slideInLeft 0.3s ease;
+}
+
+.MuiAlert-standardError {
+  background: rgba(242, 54, 77, 0.1);
+  border-color: rgba(242, 54, 77, 0.3);
+  color: #f2364d;
+}
+
+.MuiAlert-standardSuccess {
+  background: rgba(67, 181, 129, 0.1);
+  border-color: rgba(67, 181, 129, 0.3);
+  color: #43b581;
+}
+
+.MuiAlert-standardWarning {
+  background: rgba(250, 166, 26, 0.1);
+  border-color: rgba(250, 166, 26, 0.3);
+  color: #faa61a;
+}
+
+/* ========== ESTILOS DE DIVIDER ========== */
+
+.MuiDivider-root {
+  background: linear-gradient(90deg, transparent, rgba(88, 101, 242, 0.3), transparent);
+  border: none;
+  height: 1px;
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea {
+    font-size: 16px !important;
+  }
+  
+  /* Ocultar miembros en mobile */
+  .sidebar-right {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+}

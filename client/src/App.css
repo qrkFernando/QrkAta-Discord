@@ -1,0 +1,173 @@
+.chat-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, #36393f 0%, #2f3136 100%);
+}
+
+/* ===== DESKTOP (1024px+) ===== */
+.sidebar-left {
+  width: 72px;
+  background: linear-gradient(180deg, #1a1c1f 0%, #202225 100%);
+  border-right: 2px solid #1a1c1f;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 8px 0;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.sidebar-left::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(88, 101, 242, 0.5) 0%, rgba(88, 101, 242, 0) 100%);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: linear-gradient(135deg, #36393f 0%, #32353b 100%);
+  position: relative;
+}
+
+.sidebar-right {
+  width: 240px;
+  background: linear-gradient(180deg, #2f3136 0%, #282b30 100%);
+  border-left: 2px solid #40444b;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.sidebar-right::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(88, 101, 242, 0.3) 0%, rgba(88, 101, 242, 0) 100%);
+}
+
+/* Mensaje Area */
+.message-area {
+  flex: 1;
+  background: linear-gradient(135deg, #36393f 0%, #32353b 50%, #36393f 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Scrollbar Premium con Gradiente */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #5865f2 0%, #4752c4 100%);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: inset 0 0 6px rgba(88, 101, 242, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #7289da 0%, #5865f2 100%);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  box-shadow: 0 0 15px rgba(88, 101, 242, 0.6), inset 0 0 6px rgba(88, 101, 242, 0.3);
+}
+
+/* Efectos Hover en Sidebars */
+.sidebar-left:hover {
+  box-shadow: 4px 0 30px rgba(88, 101, 242, 0.3);
+}
+
+.sidebar-left:hover::after {
+  background: linear-gradient(180deg, rgba(88, 101, 242, 0.8) 0%, rgba(88, 101, 242, 0) 100%);
+  transition: all 0.3s ease;
+}
+
+.sidebar-right:hover {
+  box-shadow: -4px 0 30px rgba(88, 101, 242, 0.25);
+}
+
+.sidebar-right:hover::before {
+  background: linear-gradient(180deg, rgba(88, 101, 242, 0.5) 0%, rgba(88, 101, 242, 0) 100%);
+  transition: all 0.3s ease;
+}
+
+
+/* Indicadores de Estado */
+.typing-indicator {
+  color: #b9bbbe;
+  font-style: italic;
+  padding: 8px 16px;
+  font-size: 12px;
+  background: rgba(88, 101, 242, 0.05);
+  border-radius: 4px;
+  margin: 8px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.online-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #43b581;
+  border: 2px solid #2f3136;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  box-shadow: 0 0 8px rgba(67, 181, 129, 0.6);
+  animation: glow-online 2s ease-in-out infinite;
+}
+
+.offline-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #747f8d;
+  border: 2px solid #2f3136;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+@keyframes glow-online {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(67, 181, 129, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(67, 181, 129, 1);
+  }
+}
