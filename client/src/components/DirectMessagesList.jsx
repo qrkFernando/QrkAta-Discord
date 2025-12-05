@@ -118,9 +118,9 @@ const DirectMessagesList = ({ onDMSelect, currentDM }) => {
   // Manejo de estados de error y loading
   if (loading) {
     return (
-      <Box sx={{ width: '240px', bgcolor: '#2f3136', height: '100%', borderRight: '1px solid #40444b' }}>
-        <Box sx={{ p: 2, borderBottom: '1px solid #40444b' }}>
-          <Typography variant="h6" sx={{ color: '#fff', fontWeight: 'bold' }}>
+      <Box className="server-panel">
+        <Box className="server-header">
+          <Typography variant="h6" sx={{ color: '#fff', fontWeight: 'bold', fontSize: '16px' }}>
             Mensajes Directos
           </Typography>
         </Box>
@@ -135,9 +135,9 @@ const DirectMessagesList = ({ onDMSelect, currentDM }) => {
 
   if (error) {
     return (
-      <Box sx={{ width: '240px', bgcolor: '#2f3136', height: '100%', borderRight: '1px solid #40444b' }}>
-        <Box sx={{ p: 2, borderBottom: '1px solid #40444b' }}>
-          <Typography variant="h6" sx={{ color: '#fff', fontWeight: 'bold' }}>
+      <Box className="server-panel">
+        <Box className="server-header">
+          <Typography variant="h6" sx={{ color: '#fff', fontWeight: 'bold', fontSize: '16px' }}>
             Mensajes Directos
           </Typography>
         </Box>
@@ -154,16 +154,19 @@ const DirectMessagesList = ({ onDMSelect, currentDM }) => {
   }
 
   return (
-    <Box sx={{ width: '240px', bgcolor: '#2f3136', height: '100%', borderRight: '1px solid #40444b' }}>
+    <Box className="server-panel">
       {/* Header */}
-      <Box sx={{ p: 2, borderBottom: '1px solid #40444b', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Typography variant="h6" sx={{ color: '#fff', fontWeight: 'bold' }}>
+      <Box className="server-header">
+        <Typography variant="h6" sx={{ color: '#fff', fontWeight: 'bold', fontSize: '16px' }}>
           Mensajes Directos
         </Typography>
         <Tooltip title="Nuevo mensaje">
           <IconButton 
             size="small" 
-            sx={{ color: '#b9bbbe' }}
+            sx={{ 
+              color: '#b9bbbe',
+              '&:hover': { color: '#fff', bgcolor: 'rgba(88, 101, 242, 0.1)' }
+            }}
             onClick={() => setDmDialogOpen(true)}
           >
             <Add />
@@ -275,6 +278,47 @@ const DirectMessagesList = ({ onDMSelect, currentDM }) => {
           })
         )}
       </List>
+
+      {/* Panel de usuario */}
+      <Box className="user-panel">
+        <Avatar 
+          sx={{ width: 32, height: 32 }}
+          src={user?.avatar}
+        >
+          {user?.username?.[0]?.toUpperCase()}
+        </Avatar>
+        
+        <Box sx={{ flex: 1, minWidth: 0 }}>
+          <Typography sx={{ 
+            color: '#fff', 
+            fontSize: '14px', 
+            fontWeight: 'bold',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap'
+          }}>
+            {user?.username}
+          </Typography>
+          <Typography sx={{ 
+            color: '#43b581', 
+            fontSize: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 0.5
+          }}>
+            <Box 
+              sx={{ 
+                width: 8, 
+                height: 8, 
+                borderRadius: '50%', 
+                bgcolor: '#43b581',
+                boxShadow: '0 0 6px rgba(67, 181, 129, 0.6)'
+              }} 
+            />
+            En línea
+          </Typography>
+        </Box>
+      </Box>
 
       <DirectMessagesDialog
         open={dmDialogOpen}

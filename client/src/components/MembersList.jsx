@@ -246,7 +246,7 @@ const MembersList = ({ server, currentUser }) => {
   )
 
   return (
-    <Box className="sidebar-right">
+    <Box className="members-panel">
       <Box sx={{ p: 2 }}>
         <Typography variant="h6" sx={{ color: '#fff', fontWeight: 'bold' }}>
           Miembros — {server.members.length}

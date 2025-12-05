@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Box } from '@mui/material'
-import Sidebar from '../components/Sidebar'
+import ServerIconsColumn from '../components/ServerIconsColumn'
+import ServerPanel from '../components/ServerPanel'
 import MainContent from '../components/MainContent'
 import MembersList from '../components/MembersList'
 import DirectMessagesList from '../components/DirectMessagesList'
@@ -182,25 +183,33 @@ const Chat = () => {
 
   return (
     <Box className="chat-container">
-      <Sidebar
+      {/* Columna fija de iconos de servidores */}
+      <ServerIconsColumn
         servers={servers}
         currentServer={currentServer}
-        currentChannel={currentChannel}
         onServerSelect={handleServerSelect}
-        onChannelSelect={handleChannelSelect}
         onServerCreated={handleServerCreated}
-        onChannelCreated={handleChannelCreated}
         onDMViewOpen={handleDMViewOpen}
         viewMode={viewMode}
       />
       
-      {viewMode === 'dms' && (
+      {/* Panel lateral - servidor/canales o mensajes directos */}
+      {viewMode === 'servers' ? (
+        <ServerPanel
+          currentServer={currentServer}
+          currentChannel={currentChannel}
+          onChannelSelect={handleChannelSelect}
+          onChannelCreated={handleChannelCreated}
+          onServerCreated={handleServerCreated}
+        />
+      ) : (
         <DirectMessagesList
           onDMSelect={handleDMSelect}
           currentDM={currentDM}
         />
       )}
       
+      {/* Área principal de mensajes */}
       <MainContent
         currentServer={currentServer}
         currentChannel={currentChannel}
@@ -209,6 +218,7 @@ const Chat = () => {
         user={user}
       />
       
+      {/* Panel lateral derecho - miembros (solo en modo servidores) */}
       {viewMode === 'servers' && currentServer && (
         <MembersList
           server={currentServer}
