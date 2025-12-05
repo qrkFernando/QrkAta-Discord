@@ -5,6 +5,7 @@ import { Toaster } from 'react-hot-toast'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { SocketProvider } from './context/SocketContext'
 import { ThemeContextProvider, useTheme } from './context/ThemeContext'
+import { MobileProvider } from './context/MobileContext'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Chat from './pages/Chat'
@@ -44,11 +45,13 @@ function App() {
   return (
     <Router>
       <ThemeContextProvider>
-        <AuthProvider>
-          <SocketProvider>
-            <AppContent />
-          </SocketProvider>
-        </AuthProvider>
+        <MobileProvider>
+          <AuthProvider>
+            <SocketProvider>
+              <AppContent />
+            </SocketProvider>
+          </AuthProvider>
+        </MobileProvider>
       </ThemeContextProvider>
     </Router>
   )

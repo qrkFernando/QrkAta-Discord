@@ -5,8 +5,12 @@ import ServerPanel from '../components/ServerPanel'
 import MainContent from '../components/MainContent'
 import MembersList from '../components/MembersList'
 import DirectMessagesList from '../components/DirectMessagesList'
+import MobileMainView from '../components/MobileMainView'
+import MobileChatView from '../components/MobileChatView'
 import { useAuth } from '../context/AuthContext'
 import { useSocket } from '../context/SocketContext'
+import { useMobile } from '../context/MobileContext'
+import useMobileNavigation from '../hooks/useMobileNavigation'
 import axios from 'axios'
 
 const Chat = () => {
@@ -18,6 +22,10 @@ const Chat = () => {
   const [loading, setLoading] = useState(true)
   const { user } = useAuth()
   const { socket, joinDM } = useSocket()
+  const { isMobile, mobileView, selectedChannelForMobile } = useMobile()
+  
+  // Hook para navegación móvil
+  useMobileNavigation()
 
   useEffect(() => {
     loadServers()
@@ -181,6 +189,38 @@ const Chat = () => {
     )
   }
 
+  // Renderizado condicional para móvil
+  if (isMobile) {
+    if (mobileView === 'chat') {
+      return (
+        <MobileChatView
+          currentServer={currentServer}
+          currentChannel={selectedChannelForMobile || currentChannel}
+          currentDM={selectedChannelForMobile || currentDM}
+          viewMode={viewMode}
+          user={user}
+        />
+      )
+    }
+    
+    return (
+      <MobileMainView
+        servers={servers}
+        currentServer={currentServer}
+        currentChannel={currentChannel}
+        currentDM={currentDM}
+        onServerSelect={handleServerSelect}
+        onChannelSelect={handleChannelSelect}
+        onServerCreated={handleServerCreated}
+        onChannelCreated={handleChannelCreated}
+        onDMViewOpen={handleDMViewOpen}
+        onDMSelect={handleDMSelect}
+        viewMode={viewMode}
+      />
+    )
+  }
+
+  // Vista desktop (original)
   return (
     <Box className="chat-container">
       {/* Columna fija de iconos de servidores */}

@@ -117,8 +117,72 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ===== MOBILE INTERFACE ===== */
+/* Vista móvil principal */
+.mobile-main-view {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.mobile-main-view .server-icons-column {
+  width: 64px;
+}
+
+.mobile-main-view .server-panel {
+  flex: 1;
+  width: auto;
+}
+
+/* Vista móvil de chat */
+.mobile-chat-view {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.mobile-chat-header {
+  height: 56px;
+  background: #2f3136;
+  border-bottom: 1px solid #40444b;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  gap: 8px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Animaciones móviles */
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.mobile-view-transition {
+  animation: slideInFromRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-back-transition {
+  animation: slideInFromLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* Mejoras responsivas */
 @media (max-width: 768px) {
+  /* Desktop a tablet */
   .server-panel, .members-panel {
     width: 200px;
   }
@@ -126,16 +190,108 @@
   .server-icons-column {
     width: 56px;
   }
-}
-
-@media (max-width: 480px) {
+  
+  /* Ocultar panel de miembros en tablet */
   .members-panel {
     display: none;
   }
-  
-  .server-panel {
-    width: 180px;
+}
+
+@media (max-width: 480px) {
+  /* Mobile específico */
+  .chat-container {
+    /* En mobile, usar vistas específicas */
+    display: none;
   }
+  
+  /* Ajustes para iconos móviles */
+  .server-icons-column .MuiAvatar-root {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  /* Panel de servidor móvil */
+  .server-panel .server-header {
+    padding: 0 12px;
+  }
+  
+  .server-panel .user-panel {
+    padding: 0 12px;
+  }
+}
+
+/* Touch targets móviles */
+@media (hover: none) and (pointer: coarse) {
+  /* Botones más grandes para touch */
+  .MuiIconButton-root {
+    padding: 12px;
+  }
+  
+  .MuiListItemButton-root {
+    min-height: 48px;
+  }
+  
+  /* Mejor experiencia táctil */
+  .server-icons-column .MuiAvatar-root {
+    transition: transform 0.2s ease;
+  }
+  
+  .server-icons-column .MuiAvatar-root:active {
+    transform: scale(0.95);
+  }
+  
+  /* Feedback táctil para botones */
+  .MuiIconButton-root:active {
+    transform: scale(0.92);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* Drawer de miembros móvil */
+.mobile-members-drawer {
+  width: 80%;
+  max-width: 320px;
+  background: linear-gradient(180deg, #2f3136 0%, #282b30 100%);
+  border-left: 1px solid #40444b;
+}
+
+/* Indicador de swipe */
+.swipe-indicator {
+  position: fixed;
+  top: 50%;
+  left: 8px;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 40px;
+  background: linear-gradient(180deg, rgba(88, 101, 242, 0.8) 0%, rgba(88, 101, 242, 0.2) 100%);
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.mobile-chat-view:active .swipe-indicator {
+  opacity: 1;
+}
+
+/* Transiciones suaves entre vistas móviles */
+.mobile-transition-enter {
+  transform: translateX(100%);
+}
+
+.mobile-transition-enter-active {
+  transform: translateX(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-transition-exit {
+  transform: translateX(0);
+}
+
+.mobile-transition-exit-active {
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Mensaje Area */
