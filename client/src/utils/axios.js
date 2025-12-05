@@ -1,31 +1,24 @@
 import axios from 'axios'
 
-// Configuración base de axios
-axios.defaults.baseURL = 'http://localhost:5000'
-axios.defaults.headers.common['Content-Type'] = 'application/json'
-
-// Interceptor para agregar el token automáticamente
-axios.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
-    }
-    return config
-  },
-  (error) => {
-    return Promise.reject(error)
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+  headers: {
+    'Content-Type': 'application/json'
   }
-)
+})
 
-// Interceptor para manejar errores de respuesta
-axios.interceptors.response.use(
-  (response) => {
-    return response
-  },
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
+})
+
+api.interceptors.response.use(
+  (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Token expirado o inválido
       localStorage.removeItem('token')
       window.location.href = '/login'
     }
@@ -33,4 +26,4 @@ axios.interceptors.response.use(
   }
 )
 
-export default axios
+export default api

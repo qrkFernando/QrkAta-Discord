@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem('token')
       if (token) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-        axios.defaults.baseURL = 'http://localhost:5000'
+        axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
         const response = await axios.get('/api/auth/me')
         setUser(response.data)
         setIsAuthenticated(true)
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      axios.defaults.baseURL = 'http://localhost:5000'
+      axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
       const response = await axios.post('/api/auth/login', { email, password })
       const { token, user } = response.data
 
@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (username, email, password) => {
     try {
-      axios.defaults.baseURL = 'http://localhost:5000'
+      axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
       const response = await axios.post('/api/auth/register', { 
         username, 
         email, 

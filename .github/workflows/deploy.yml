@@ -1,0 +1,80 @@
+name: Deploy QrkAta
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        cd server && npm install
+        cd ../client && npm install
+        
+    - name: Run tests
+      run: |
+        cd server && npm run build
+        cd ../client && npm run build
+
+  deploy-frontend:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Install and Build Frontend
+      run: |
+        cd client
+        npm install
+        npm run build
+        
+    - name: Deploy to Netlify
+      uses: netlify/actions/cli@master
+      with:
+        args: deploy --prod --dir=client/dist
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+  deploy-backend:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Deploy to Render
+      run: |
+        curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+      if: ${{ secrets.RENDER_DEPLOY_HOOK }}
+      
+    - name: Deploy to Railway
+      run: |
+        npm install -g @railway/cli
+        railway login --token ${{ secrets.RAILWAY_TOKEN }}
+        railway up
+      if: ${{ secrets.RAILWAY_TOKEN }}

@@ -4,7 +4,11 @@ const socketIo = require('socket.io')
 const cors = require('cors')
 const helmet = require('helmet')
 const rateLimit = require('express-rate-limit')
-require('dotenv').config()
+
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 
 const connectDB = require('./config/database')
 const authRoutes = require('./routes/auth')
@@ -12,6 +16,7 @@ const serverRoutes = require('./routes/servers')
 const channelRoutes = require('./routes/channels')
 const messageRoutes = require('./routes/messages')
 const userRoutes = require('./routes/users')
+const healthRoutes = require('./routes/health')
 
 const { authenticateSocket } = require('./middleware/socketAuth')
 const socketHandlers = require('./controllers/socketController')
@@ -20,8 +25,11 @@ const app = express()
 const server = http.createServer(app)
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"]
+    origin: process.env.NODE_ENV === 'production' 
+      ? (process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : ['https://qrkata-frontend.vercel.app'])
+      : ["http://localhost:3000", "http://localhost:5173"],
+    methods: ["GET", "POST"],
+    credentials: true
   }
 })
 
@@ -39,10 +47,18 @@ const limiter = rateLimit({
 app.use('/api/', limiter)
 
 // CORS
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
-}))
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? (process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : ['https://qrkata-frontend.vercel.app'])
+    : ['http://localhost:3000', 'http://localhost:5173'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}
+app.use(cors(corsOptions))
+
+// Handle preflight requests
+app.options('*', cors(corsOptions))
 
 // Middleware para parsear JSON
 app.use(express.json({ limit: '10mb' }))
@@ -52,6 +68,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/uploads', express.static('uploads'))
 
 // Rutas de la API
+app.use('/api/health', healthRoutes)
 app.use('/api/auth', authRoutes)
 app.use('/api/servers', serverRoutes)
 app.use('/api/channels', channelRoutes)

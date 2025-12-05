@@ -8,10 +8,22 @@
     "server": "cd server && npm run dev",
     "client": "cd client && npm run dev",
     "build": "cd client && npm run build",
+    "build:client": "cd client && npm install && npm run build",
+    "build:server": "cd server && npm install",
     "start": "cd server && npm start",
+    "start:prod": "NODE_ENV=production cd server && npm start",
     "install-deps": "cd server && npm install && cd ../client && npm install",
     "test-db": "node test-connection.js",
-    "setup": "npm run install-deps && npm run test-db"
+    "setup": "npm run install-deps && npm run test-db",
+    "deploy:full": "npm run build:client && npm run build:server",
+    "deploy:check": "npm run test-db && npm run build:client",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "clean": "cd client && rm -rf dist node_modules && cd ../server && rm -rf node_modules",
+    "deploy:prepare": "node deploy.js",
+    "deploy:netlify": "cd client && npm install -g netlify-cli && netlify deploy --prod --dir=dist",
+    "deploy:vercel": "cd client && npm install -g vercel && vercel --prod"
   },
   "keywords": [
     "chat",
