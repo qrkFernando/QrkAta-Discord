@@ -106,6 +106,21 @@
   padding: 0 8px;
   gap: 8px;
   transition: all 0.2s ease;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+
+/* Asegurar que siempre esté al fondo */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari fix */
+  .user-panel {
+    padding-bottom: env(safe-area-inset-bottom, 8px);
+  }
+  
+  .message-input-bar {
+    padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+  }
 }
 
 .user-panel:hover {
@@ -122,6 +137,7 @@
 .mobile-main-view {
   display: flex;
   height: 100vh;
+  height: 100dvh; /* Dynamic viewport height para móviles */
   overflow: hidden;
 }
 
@@ -137,9 +153,11 @@
 /* Vista móvil de chat */
 .mobile-chat-view {
   height: 100vh;
+  height: 100dvh; /* Dynamic viewport height para móviles */
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
 }
 
 .mobile-chat-header {
@@ -217,6 +235,61 @@
   
   .server-panel .user-panel {
     padding: 0 12px;
+  }
+  
+  /* Forzar que las barras estén pegadas al fondo */
+  .mobile-main-view .server-panel {
+    height: 100vh;
+    height: 100dvh;
+  }
+  
+  .mobile-chat-view .main-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Asegurar que el user-panel esté en el fondo */
+  .user-panel {
+    position: sticky;
+    bottom: 0;
+    margin-top: auto;
+  }
+  
+  /* Barra de envío de mensajes pegada al fondo en móvil */
+  .message-input-bar {
+    position: sticky !important;
+    bottom: 0 !important;
+    margin-top: auto !important;
+    z-index: 10 !important;
+  }
+  
+  /* Layout móvil perfecto */
+  .mobile-main-view {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  .mobile-chat-view {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  /* Prevenir scroll del body en móvil */
+  body.mobile-view {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
   }
 }
 

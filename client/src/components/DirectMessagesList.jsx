@@ -154,7 +154,15 @@ const DirectMessagesList = ({ onDMSelect, currentDM }) => {
   }
 
   return (
-    <Box className="server-panel">
+    <Box 
+      className="server-panel"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        overflow: 'hidden'
+      }}
+    >
       {/* Header */}
       <Box className="server-header">
         <Typography variant="h6" sx={{ color: '#fff', fontWeight: 'bold', fontSize: '16px' }}>
@@ -175,7 +183,13 @@ const DirectMessagesList = ({ onDMSelect, currentDM }) => {
       </Box>
 
       {/* Lista de DMs */}
-      <List sx={{ py: 1 }}>
+      <Box
+        sx={{
+          flex: 1,
+          overflow: 'auto'
+        }}
+      >
+        <List sx={{ py: 1 }}>
         {dms.length === 0 ? (
           <ListItem>
             <ListItemText
@@ -277,7 +291,8 @@ const DirectMessagesList = ({ onDMSelect, currentDM }) => {
             }
           })
         )}
-      </List>
+        </List>
+      </Box>
 
       {/* Panel de usuario */}
       <Box className="user-panel">

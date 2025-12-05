@@ -287,7 +287,15 @@ const MainContent = ({ currentServer, currentChannel, currentDM, viewMode, user 
   }
 
   return (
-    <Box className="main-content">
+    <Box 
+      className="main-content"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        overflow: 'hidden'
+      }}
+    >
       {/* Header del canal */}
       <Box 
         sx={{ 
@@ -297,7 +305,8 @@ const MainContent = ({ currentServer, currentChannel, currentDM, viewMode, user 
           px: 2,
           borderBottom: '1px solid',
           borderColor: 'divider',
-          bgcolor: 'background.paper'
+          bgcolor: 'background.paper',
+          flexShrink: 0
         }}
       >
         {viewMode === 'servers' && currentChannel && (
@@ -407,7 +416,16 @@ const MainContent = ({ currentServer, currentChannel, currentDM, viewMode, user 
 
       {/* Input de mensaje */}
       {(viewMode === 'servers' && currentChannel) || (viewMode === 'dms' && currentDM) ? (
-        <Box sx={{ p: 2, bgcolor: 'background.paper' }}>
+        <Box 
+          className="message-input-bar"
+          sx={{ 
+            p: 2, 
+            bgcolor: 'background.paper',
+            borderTop: '1px solid',
+            borderColor: 'divider',
+            flexShrink: 0
+          }}
+        >
         {replyTo && (
           <Paper 
             sx={{ 

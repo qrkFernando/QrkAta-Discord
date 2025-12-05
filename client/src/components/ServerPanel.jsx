@@ -33,7 +33,15 @@ const ServerPanel = ({
   const { isDarkMode, toggleTheme } = useTheme()
 
   return (
-    <Box className="server-panel">
+    <Box 
+      className="server-panel"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        overflow: 'hidden'
+      }}
+    >
       {currentServer ? (
         <>
           {/* Header del servidor */}
@@ -81,7 +89,13 @@ const ServerPanel = ({
           </Box>
 
           {/* Área de canales */}
-          <Box className="channels-area">
+          <Box 
+            className="channels-area"
+            sx={{
+              flex: 1,
+              overflow: 'auto'
+            }}
+          >
             <DraggableChannelList
               channels={currentServer.channels || []}
               currentChannel={currentChannel}

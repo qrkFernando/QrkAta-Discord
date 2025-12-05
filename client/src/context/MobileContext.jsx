@@ -19,10 +19,15 @@ export const MobileProvider = ({ children }) => {
   useEffect(() => {
     const checkMobile = () => {
       const width = window.innerWidth
-      setIsMobile(width <= 768)
+      const newIsMobile = width <= 768
+      setIsMobile(newIsMobile)
       
-      // Si cambia a desktop, resetear vista móvil
-      if (width > 768) {
+      // Manejar clase del body para prevenir scroll en móvil
+      if (newIsMobile) {
+        document.body.classList.add('mobile-view')
+      } else {
+        document.body.classList.remove('mobile-view')
+        // Si cambia a desktop, resetear vista móvil
         setMobileView('main')
         setSelectedChannelForMobile(null)
       }
@@ -31,7 +36,10 @@ export const MobileProvider = ({ children }) => {
     checkMobile()
     window.addEventListener('resize', checkMobile)
     
-    return () => window.removeEventListener('resize', checkMobile)
+    return () => {
+      window.removeEventListener('resize', checkMobile)
+      document.body.classList.remove('mobile-view')
+    }
   }, [])
 
   const showMobileChat = (channel) => {
