@@ -13,7 +13,6 @@ import {
 } from '@mui/material'
 import {
   Send,
-  EmojiEmotions,
   AttachFile,
   Notifications,
   NotificationsOff,
@@ -22,6 +21,7 @@ import {
 import { useSocket } from '../context/SocketContext'
 import Message from './Message'
 import TypingIndicator from './TypingIndicator'
+import EmojiPicker from './EmojiPicker'
 import axios from 'axios'
 
 const MainContent = ({ currentServer, currentChannel, currentDM, viewMode, user }) => {
@@ -245,6 +245,10 @@ const MainContent = ({ currentServer, currentChannel, currentDM, viewMode, user 
 
   const cancelReply = () => {
     setReplyTo(null)
+  }
+
+  const handleEmojiSelect = (emoji) => {
+    setMessageInput(prev => prev + emoji)
   }
 
   const getTypingUsers = () => {
@@ -473,9 +477,10 @@ const MainContent = ({ currentServer, currentChannel, currentDM, viewMode, user 
             }}
           />
           
-          <IconButton color="primary">
-            <EmojiEmotions />
-          </IconButton>
+          <EmojiPicker 
+            onEmojiSelect={handleEmojiSelect}
+            disabled={!currentChannel && !currentDM}
+          />
           
           <IconButton>
             <AttachFile />

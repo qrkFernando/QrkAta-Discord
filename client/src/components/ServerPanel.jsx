@@ -65,8 +65,13 @@ const ServerPanel = ({
                 <IconButton 
                   size="small" 
                   sx={{ 
-                    color: '#b9bbbe',
-                    '&:hover': { color: '#fff', bgcolor: 'rgba(88, 101, 242, 0.1)' }
+                    color: 'info.main',
+                    transition: 'all 0.2s ease',
+                    '&:hover': { 
+                      color: 'info.light', 
+                      bgcolor: 'rgba(59, 130, 246, 0.1)',
+                      transform: 'scale(1.1)'
+                    }
                   }}
                   onClick={() => setServerSettingsOpen(true)}
                 >
@@ -77,8 +82,13 @@ const ServerPanel = ({
                 <IconButton 
                   size="small" 
                   sx={{ 
-                    color: '#b9bbbe',
-                    '&:hover': { color: '#fff', bgcolor: 'rgba(88, 101, 242, 0.1)' }
+                    color: 'success.main',
+                    transition: 'all 0.2s ease',
+                    '&:hover': { 
+                      color: 'success.light', 
+                      bgcolor: 'rgba(16, 185, 129, 0.1)',
+                      transform: 'scale(1.1)'
+                    }
                   }}
                   onClick={() => setCreateChannelOpen(true)}
                 >

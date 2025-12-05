@@ -1,0 +1,70 @@
+/* ===== PALETA DE COLORES ARMÓNICA ===== */
+:root {
+  /* Colores Principales */
+  --primary-violet: #7c3aed;
+  --primary-violet-light: #a855f7;
+  --primary-violet-dark: #5b21b6;
+  
+  /* Colores Secundarios */
+  --secondary-cyan: #06b6d4;
+  --secondary-cyan-light: #22d3ee;
+  --secondary-cyan-dark: #0891b2;
+  
+  /* Colores Terciarios */
+  --tertiary-orange: #f97316;
+  --tertiary-orange-light: #fb923c;
+  --tertiary-orange-dark: #ea580c;
+  
+  /* Colores de Estado */
+  --success-emerald: #10b981;
+  --success-emerald-light: #34d399;
+  --success-emerald-dark: #059669;
+  
+  --warning-amber: #f59e0b;
+  --warning-amber-light: #fbbf24;
+  --warning-amber-dark: #d97706;
+  
+  --error-coral: #ef4444;
+  --error-coral-light: #f87171;
+  --error-coral-dark: #dc2626;
+  
+  --info-indigo: #3b82f6;
+  --info-indigo-light: #60a5fa;
+  --info-indigo-dark: #2563eb;
+  
+  /* Fondos Oscuros */
+  --bg-dark-primary: #1e1b2e;
+  --bg-dark-secondary: #2a2438;
+  --bg-dark-accent: #362d4a;
+  
+  /* Fondos Claros */
+  --bg-light-primary: #f8fafc;
+  --bg-light-secondary: #ffffff;
+  --bg-light-accent: #f1f5f9;
+  
+  /* Textos */
+  --text-primary-dark: #e2e8f0;
+  --text-secondary-dark: #cbd5e1;
+  --text-accent-dark: #a855f7;
+  
+  --text-primary-light: #1e293b;
+  --text-secondary-light: #475569;
+  --text-accent-light: #7c3aed;
+  
+  /* Gradientes */
+  --gradient-primary: linear-gradient(135deg, var(--primary-violet) 0%, var(--secondary-cyan) 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--tertiary-orange) 0%, var(--warning-amber) 100%);
+  --gradient-success: linear-gradient(135deg, var(--success-emerald) 0%, var(--secondary-cyan-light) 100%);
+  --gradient-danger: linear-gradient(135deg, var(--error-coral) 0%, var(--tertiary-orange) 100%);
+  
+  /* Sombras con Colores */
+  --shadow-violet: 0 4px 20px rgba(124, 58, 237, 0.3);
+  --shadow-cyan: 0 4px 20px rgba(6, 182, 212, 0.3);
+  --shadow-orange: 0 4px 20px rgba(249, 115, 22, 0.3);
+  --shadow-success: 0 4px 20px rgba(16, 185, 129, 0.3);
+  
+  /* Opacidades para overlays */
+  --overlay-10: rgba(124, 58, 237, 0.1);
+  --overlay-20: rgba(124, 58, 237, 0.2);
+  --overlay-30: rgba(124, 58, 237, 0.3);
+}

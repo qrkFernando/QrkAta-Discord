@@ -40,14 +40,19 @@ const ServerIconsColumn = ({
                 sx={{
                   width: 48,
                   height: 48,
-                  bgcolor: (currentServer?._id === server._id && viewMode === 'servers') ? '#5865f2' : '#4f545c',
+                  background: (currentServer?._id === server._id && viewMode === 'servers') 
+                    ? 'linear-gradient(135deg, #7c3aed 0%, #a855f7 100%)'
+                    : 'linear-gradient(135deg, #475569 0%, #64748b 100%)',
                   cursor: 'pointer',
-                  transition: 'all 0.2s ease',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                   borderRadius: (currentServer?._id === server._id && viewMode === 'servers') ? '16px' : '50%',
+                  boxShadow: (currentServer?._id === server._id && viewMode === 'servers') 
+                    ? '0 4px 20px rgba(124, 58, 237, 0.4)' : 'none',
                   '&:hover': {
-                    bgcolor: '#5865f2',
+                    background: 'linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%)',
                     borderRadius: '16px',
-                    transform: 'scale(1.05)'
+                    transform: 'scale(1.1) rotate(2deg)',
+                    boxShadow: '0 8px 25px rgba(6, 182, 212, 0.4)'
                   }
                 }}
                 onClick={() => onServerSelect(server)}
@@ -71,13 +76,14 @@ const ServerIconsColumn = ({
               sx={{
                 width: 48,
                 height: 48,
-                bgcolor: '#43b581',
+                background: 'linear-gradient(135deg, #10b981 0%, #34d399 100%)',
                 cursor: 'pointer',
-                transition: 'all 0.2s ease',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 '&:hover': {
-                  bgcolor: '#3ca374',
+                  background: 'linear-gradient(135deg, #059669 0%, #10b981 100%)',
                   borderRadius: '16px',
-                  transform: 'scale(1.05)'
+                  transform: 'scale(1.1) rotate(-2deg)',
+                  boxShadow: '0 8px 25px rgba(16, 185, 129, 0.4)'
                 }
               }}
               onClick={() => setCreateServerOpen(true)}
@@ -94,13 +100,14 @@ const ServerIconsColumn = ({
               sx={{
                 width: 48,
                 height: 48,
-                bgcolor: '#7289da',
+                background: 'linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%)',
                 cursor: 'pointer',
-                transition: 'all 0.2s ease',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 '&:hover': {
-                  bgcolor: '#677bc4',
+                  background: 'linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)',
                   borderRadius: '16px',
-                  transform: 'scale(1.05)'
+                  transform: 'scale(1.1) rotate(2deg)',
+                  boxShadow: '0 8px 25px rgba(59, 130, 246, 0.4)'
                 }
               }}
               onClick={() => setJoinServerOpen(true)}
@@ -119,14 +126,23 @@ const ServerIconsColumn = ({
               sx={{
                 width: 48,
                 height: 48,
-                bgcolor: viewMode === 'dms' ? '#5865f2' : '#f04747',
+                background: viewMode === 'dms' 
+                  ? 'linear-gradient(135deg, #7c3aed 0%, #a855f7 100%)'
+                  : 'linear-gradient(135deg, #ef4444 0%, #f97316 100%)',
                 cursor: 'pointer',
-                transition: 'all 0.2s ease',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 borderRadius: viewMode === 'dms' ? '16px' : '50%',
+                boxShadow: viewMode === 'dms' 
+                  ? '0 4px 20px rgba(124, 58, 237, 0.4)' : 'none',
                 '&:hover': {
-                  bgcolor: viewMode === 'dms' ? '#4752c4' : '#d63939',
+                  background: viewMode === 'dms' 
+                    ? 'linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%)'
+                    : 'linear-gradient(135deg, #dc2626 0%, #ea580c 100%)',
                   borderRadius: '16px',
-                  transform: 'scale(1.05)'
+                  transform: 'scale(1.1) rotate(-2deg)',
+                  boxShadow: viewMode === 'dms' 
+                    ? '0 8px 25px rgba(124, 58, 237, 0.4)' 
+                    : '0 8px 25px rgba(239, 68, 68, 0.4)'
                 }
               }}
               onClick={onDMViewOpen}

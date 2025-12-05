@@ -75,10 +75,12 @@ const MobileHeader = ({
           edge="start"
           onClick={showMobileMain}
           sx={{ 
-            color: '#b9bbbe',
+            color: 'text.secondary',
+            transition: 'all 0.2s ease',
             '&:hover': { 
-              color: '#fff', 
-              bgcolor: 'rgba(88, 101, 242, 0.1)' 
+              color: 'primary.main',
+              bgcolor: 'rgba(124, 58, 237, 0.1)',
+              transform: 'scale(1.1)'
             },
             '&:active': {
               transform: 'scale(0.95)'
@@ -183,10 +185,12 @@ const MobileHeader = ({
                 size="small"
                 onClick={onMembersToggle}
                 sx={{ 
-                  color: '#b9bbbe',
+                  color: 'secondary.main',
+                  transition: 'all 0.2s ease',
                   '&:hover': { 
-                    color: '#fff', 
-                    bgcolor: 'rgba(185, 187, 190, 0.1)' 
+                    color: 'secondary.light',
+                    bgcolor: 'rgba(6, 182, 212, 0.1)',
+                    transform: 'scale(1.1)'
                   }
                 }}
               >
@@ -199,10 +203,12 @@ const MobileHeader = ({
             <IconButton
               edge="end"
               sx={{ 
-                color: '#b9bbbe',
+                color: 'text.secondary',
+                transition: 'all 0.2s ease',
                 '&:hover': { 
-                  color: '#fff', 
-                  bgcolor: 'rgba(185, 187, 190, 0.1)' 
+                  color: 'warning.main',
+                  bgcolor: 'rgba(249, 115, 22, 0.1)',
+                  transform: 'scale(1.1)'
                 }
               }}
             >
